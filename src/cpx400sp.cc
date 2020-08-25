@@ -14,24 +14,23 @@ using namespace std;
 int main(int argc, char **argv) {
     char response[65536];
     int device, length, timeout = 1000;
-    const char *command = "*IDN?";
 
     // Initialize LXI library
     lxi_init();
 
     // Connect to LXI device
-    // device = lxi_connect("192.168.1.131", 9221, "inst0", timeout, VXI11);
+    device = lxi_connect("192.168.1.131", 9221, "inst0", timeout, RAW);
 
     // Send SCPI command
-    // lxi_send(device, command, strlen(command), timeout);
+    lxi_send(device, "*IDN?", strlen("*IDN?"), timeout);
 
     // Wait for response
-    // lxi_receive(device, response, sizeof(response), timeout);
+    lxi_receive(device, response, sizeof(response), timeout);
 
-    //printf("%s\n", response);
+    printf("%s\n", response);
 
     // Disconnect
-    //lxi_disconnect(device);
+    lxi_disconnect(device);
 
     return 0;
 }
